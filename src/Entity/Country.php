@@ -3,29 +3,32 @@ declare(strict_types=1);
 
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Uid\Uuid;
 
 class Country
 {
-
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private int $id;
+    #[ORM\Column(type: 'uuid')]
+    private Uuid $uuid;
 
-    /**
-     * @return int
-     */
-    public function getId(): int
+    public function __construct()
     {
-        return $this->id;
+        $this->uuid = Uuid::v4();
+    }
+    /**
+     * @return Uuid
+     */
+    public function getUuid(): Uuid
+    {
+        return $this->uuid;
     }
 
     /**
-     * @param int $id
+     * @param Uuid $uuid
      */
-    public function setId(int $id): void
+    public function setUuid(Uuid $uuid): void
     {
-        $this->id = $id;
+        $this->uuid = $uuid;
     }
 
 }
