@@ -1,0 +1,83 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+/.idea
+###< symfony/framework-bundle ###
+# ====================================
+# Symfony defaults
+# ====================================
+.env.local.php
+.env.*.local
+/config/secrets/*/secrets.*.yaml
+!config/secrets/prod/
+node_modules/
+.pnp.*
+.phpunit.result.cache
+
+# Symfony profiler logs
+.profiler
+
+# ====================================
+# Docker-specific
+# ====================================
+.docker/
+docker-compose.override.yml
+.env.override
+.env.docker.local
+.env.docker.override
+/docker-volumes/
+/docker/logs/
+/docker/db-data/
+/docker/cache/
+/docker/tmp/
+
+# Ignore files generated in containers
+*.pid
+*.log
+*.sock
+
+# Ignore Docker build cache (optional)
+.docker-cache/
+
+# ====================================
+# IDEs & Editor settings
+# ====================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ====================================
+# OS-specific files
+# ====================================
+.DS_Store
+Thumbs.db
+
+# ====================================
+# Test & Coverage
+# ====================================
+/coverage/
+/phpunit.xml.cache
+
+# ====================================
+# Composer artifacts
+# ====================================
+/composer.lock
+
+# ====================================
+# npm / yarn artifacts
+# ====================================
+/yarn.lock
+/package-lock.json
+/dist/
+build/
+
+
+README.pdf
+.env
