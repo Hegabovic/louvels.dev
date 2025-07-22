@@ -75,6 +75,6 @@ class RegisterRequestValidator implements RequestValidatorInterface
     public function supports(Request $request): bool
     {
         return $request->isMethod('POST') && 
-               preg_match('#^/api/v1/auth/register$#', $request->getPathInfo());
+               preg_match('#^/api/v1/register$#', $request->getPathInfo());
     }
 }

@@ -74,7 +74,6 @@ class CountryController extends AbstractController
     }
 
     #[Route('', methods: ['POST'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function addCountry(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
@@ -113,7 +112,6 @@ class CountryController extends AbstractController
     }
 
     #[Route('/{country}', methods: ['PATCH'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function updateCountry(string $country, Request $request): JsonResponse
     {
         // Try to find country by UUID first, then by name if UUID is invalid
@@ -207,7 +205,6 @@ class CountryController extends AbstractController
     }
 
     #[Route('/{country}', methods: ['DELETE'])]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function deleteCountry(string $country): JsonResponse
     {
         // Try to find country by UUID first, then by name if UUID is invalid

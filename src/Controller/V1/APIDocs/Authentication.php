@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class Authentication
 {
     #[OA\Post(
-        path: '/api/v1/auth/register',
+        path: '/api/v1/register',
         description: 'Creates a new user account with the provided information',
         summary: 'Register a new user',
         requestBody: new OA\RequestBody(
@@ -74,7 +74,7 @@ class Authentication
     }
 
     #[OA\Post(
-        path: '/api/v1/auth/login',
+        path: '/api/v1/login',
         description: 'Authenticates a user and returns a JWT token',
         summary: 'Login to the system',
         requestBody: new OA\RequestBody(
@@ -118,7 +118,7 @@ class Authentication
     }
 
     #[OA\Post(
-        path: '/api/v1/auth/logout',
+        path: '/api/v1/logout',
         description: 'Logs out the current user. Since JWT is stateless, the client should discard the token.',
         summary: 'Logout from the system',
         security: [['Bearer' => []]],
@@ -152,7 +152,7 @@ class Authentication
     }
 
     #[OA\Get(
-        path: '/api/v1/auth/me',
+        path: '/api/v1/me',
         description: 'Returns information about the currently authenticated user',
         summary: 'Get current user information',
         security: [['Bearer' => []]],
