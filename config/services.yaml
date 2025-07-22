@@ -26,9 +26,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # Tag all request validators
-    App\Validator\RequestValidatorInterface:
-        tags: ['app.request_validator']
+    # Autoconfigure all implementations of RequestValidatorInterface with the app.request_validator tag
+    _instanceof:
+        App\Validator\RequestValidatorInterface:
+            tags: ['app.request_validator']
 
     # Configure the request validator subscriber
     App\EventSubscriber\RequestValidatorSubscriber:

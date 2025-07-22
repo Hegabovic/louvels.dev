@@ -5,20 +5,22 @@ namespace App\Repository;
 
 use App\Entity\Country;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Uid\Uuid;
 
-class CountryRepository implements CountryRepositoryInterface
+class CountryRepository extends EntityRepository implements CountryRepositoryInterface
 {
-    public function __construct(
-        private readonly EntityManagerInterface $entityManager
-    ) {}
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        parent::__construct($entityManager, $entityManager->getClassMetadata(Country::class));
+    }
 
     /**
      * @inheritDoc
      */
     public function findAll(): array
     {
-        return $this->entityManager->getRepository(Country::class)->findAll();
+        return parent::findAll();
     }
 
     /**
@@ -26,7 +28,7 @@ class CountryRepository implements CountryRepositoryInterface
      */
     public function findByUuid(Uuid $uuid): ?Country
     {
-        return $this->entityManager->getRepository(Country::class)->findOneBy(['uuid' => $uuid]);
+        return $this->findOneBy(['uuid' => $uuid]);
     }
 
     /**
@@ -34,7 +36,7 @@ class CountryRepository implements CountryRepositoryInterface
      */
     public function findByName(string $name): ?Country
     {
-        return $this->entityManager->getRepository(Country::class)->findOneBy(['name' => $name]);
+        return $this->findOneBy(['name' => $name]);
     }
 
     /**
@@ -42,8 +44,8 @@ class CountryRepository implements CountryRepositoryInterface
      */
     public function save(Country $country): void
     {
-        $this->entityManager->persist($country);
-        $this->entityManager->flush();
+        $this->getEntityManager()->persist($country);
+        $this->getEntityManager()->flush();
     }
 
     /**
@@ -51,7 +53,8 @@ class CountryRepository implements CountryRepositoryInterface
      */
     public function remove(Country $country): void
     {
-        $this->entityManager->remove($country);
-        $this->entityManager->flush();
+        $this->getEntityManager()->remove($country);
+        $this->getEntityManager()->flush();
     }
+    
 }

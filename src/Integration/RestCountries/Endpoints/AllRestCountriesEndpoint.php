@@ -14,7 +14,7 @@ class AllRestCountriesEndpoint
 
     public function fetchAll(): array
     {
-        $response = $this->httpClient->request('GET', $this->baseUrl . '/all');
+        $response = $this->httpClient->request('GET', $this->baseUrl . '/all?fields=name,flags,region,subregion,demonyms,population,independent,currencies');
         return $response->toArray();
     }
 

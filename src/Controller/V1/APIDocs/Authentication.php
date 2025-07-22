@@ -4,7 +4,9 @@ namespace App\Controller\V1\APIDocs;
 
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation\Areas;
 
+#[Areas(['default'])]
 #[OA\Tag(name: 'Authentication', description: 'Authentication operations')]
 class Authentication
 {

@@ -15,6 +15,5 @@ nelmio_api_doc:
     areas:
         default:
             path_patterns:
-                - ^/api(?!/doc$)
-            annotation_patterns:
-                - App\Controller\V1\APIDocs
+                - ^/api/v1
+            with_annotation: true

@@ -4,7 +4,9 @@ namespace App\Controller\V1\APIDocs;
 
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Response;
+use Nelmio\ApiDocBundle\Annotation\Areas;
 
+#[Areas(['default'])]
 #[OA\Tag(name: 'Countries', description: 'Country management operations')]
 class Countries
 {
