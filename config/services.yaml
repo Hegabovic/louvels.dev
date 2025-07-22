@@ -38,3 +38,16 @@ services:
     App\Integration\RestCountries\Endpoints\AllRestCountriesEndpoint:
         arguments:
             $baseUrl: '%restcountries.base_url%'
+            
+    # Custom JWT Authentication Success Handler
+    app.jwt_authentication_success_handler:
+        class: App\Security\JWTAuthenticationSuccessHandler
+        arguments:
+            $jwtManager: '@lexik_jwt_authentication.jwt_manager'
+            $originalSuccessHandler: '@lexik_jwt_authentication.handler.authentication_success'
+            $ttl: '%lexik_jwt_authentication.token_ttl%'
+            
+    # Configure AuthController with JWT token TTL
+    App\Controller\V1\AuthController:
+        arguments:
+            $ttl: '%lexik_jwt_authentication.token_ttl%'

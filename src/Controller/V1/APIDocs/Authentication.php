@@ -31,17 +31,24 @@ class Authentication
                 description: 'User registered successfully',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'message', type: 'string', example: 'User registered successfully'),
+                        new OA\Property(property: 'token', type: 'string', example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'),
+                        new OA\Property(property: 'refresh_token', type: 'string', example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'),
                         new OA\Property(
                             property: 'user',
                             properties: [
                                 new OA\Property(property: 'uuid', type: 'string', format: 'uuid', example: '550e8400-e29b-41d4-a716-446655440000'),
                                 new OA\Property(property: 'email', type: 'string', format: 'email', example: 'user@example.com'),
                                 new OA\Property(property: 'firstName', type: 'string', example: 'John'),
-                                new OA\Property(property: 'lastName', type: 'string', example: 'Doe')
+                                new OA\Property(property: 'lastName', type: 'string', example: 'Doe'),
+                                new OA\Property(
+                                    property: 'roles',
+                                    type: 'array',
+                                    items: new OA\Items(type: 'string', example: 'ROLE_USER')
+                                )
                             ],
                             type: 'object'
-                        )
+                        ),
+                        new OA\Property(property: 'expires_at', type: 'string', format: 'date-time', example: '2025-07-22T17:11:00+00:00')
                     ],
                     type: 'object'
                 )
@@ -95,7 +102,23 @@ class Authentication
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'token', type: 'string', example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'),
-                        new OA\Property(property: 'refresh_token', type: 'string', example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...')
+                        new OA\Property(property: 'refresh_token', type: 'string', example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...'),
+                        new OA\Property(
+                            property: 'user',
+                            properties: [
+                                new OA\Property(property: 'uuid', type: 'string', format: 'uuid', example: '550e8400-e29b-41d4-a716-446655440000'),
+                                new OA\Property(property: 'email', type: 'string', format: 'email', example: 'user@example.com'),
+                                new OA\Property(property: 'firstName', type: 'string', example: 'John'),
+                                new OA\Property(property: 'lastName', type: 'string', example: 'Doe'),
+                                new OA\Property(
+                                    property: 'roles',
+                                    type: 'array',
+                                    items: new OA\Items(type: 'string', example: 'ROLE_USER')
+                                )
+                            ],
+                            type: 'object'
+                        ),
+                        new OA\Property(property: 'expires_at', type: 'string', format: 'date-time', example: '2025-07-22T17:11:00+00:00')
                     ],
                     type: 'object'
                 )

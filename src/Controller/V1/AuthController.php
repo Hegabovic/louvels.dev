@@ -5,6 +5,7 @@ namespace App\Controller\V1;
 
 use App\Entity\User;
 use App\Repository\UserRepositoryInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +19,9 @@ class AuthController extends AbstractController
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository,
-        private readonly UserPasswordHasherInterface $passwordHasher
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly JWTTokenManagerInterface $jwtManager,
+        private readonly int $ttl = 3600
     ) {}
 
     #[Route('/register', methods: ['POST'])]
@@ -56,14 +59,22 @@ class AuthController extends AbstractController
         // Save the user
         $this->userRepository->save($user);
         
+        // Generate JWT token
+        $token = $this->jwtManager->create($user);
+        $refreshToken = $token;
+        $expiresAt = (new \DateTime())->add(new \DateInterval('PT' . $this->ttl . 'S'))->format('c');
+        
         return $this->json([
-            'message' => 'User registered successfully',
+            'token' => $token,
+            'refresh_token' => $refreshToken,
             'user' => [
                 'uuid' => $user->getUuid()->toRfc4122(),
                 'email' => $user->getEmail(),
                 'firstName' => $user->getFirstName(),
                 'lastName' => $user->getLastName(),
-            ]
+                'roles' => $user->getRoles(),
+            ],
+            'expires_at' => $expiresAt
         ], Response::HTTP_CREATED);
     }
 
