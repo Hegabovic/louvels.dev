@@ -53,6 +53,7 @@ RUN set -eux; \
 ENV PATH="${PATH}:/root/.composer/vendor/bin"
 
 WORKDIR /app
+RUN git config --global --add safe.directory /app
 
 # build for production
 ARG APP_ENV=prod

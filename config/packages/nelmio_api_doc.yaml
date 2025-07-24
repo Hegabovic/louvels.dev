@@ -4,6 +4,15 @@ nelmio_api_doc:
             title: Symfony Assessment
             description: These are the endpoints for my Symfony Assessment
             version: 1.0.0
+        securitySchemes:
+            Bearer:
+                type: http
+                scheme: bearer
+                bearerFormat: JWT
+        security:
+            - Bearer: []
+    models: { use_jms: false }
     areas:
-        path_patterns:
-            - ^/api(?!/doc$)
+        default:
+            path_patterns:
+                - ^/api

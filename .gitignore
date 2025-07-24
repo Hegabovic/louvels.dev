@@ -81,3 +81,6 @@ build/
 
 README.pdf
 .env
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
