@@ -15,5 +15,4 @@ nelmio_api_doc:
     areas:
         default:
             path_patterns:
-                - ^/api/v1
-            with_annotation: true
+                - ^/api

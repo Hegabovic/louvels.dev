@@ -23,7 +23,8 @@ class Authentication
                     new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password123'),
                     new OA\Property(property: 'firstName', type: 'string', example: 'John'),
                     new OA\Property(property: 'lastName', type: 'string', example: 'Doe')
-                ]
+                ],
+                type: 'object'
             )
         ),
         tags: ['Authentication'],
@@ -93,7 +94,8 @@ class Authentication
                 properties: [
                     new OA\Property(property: 'email', type: 'string', format: 'email', example: 'user@example.com'),
                     new OA\Property(property: 'password', type: 'string', format: 'password', example: 'password123')
-                ]
+                ],
+                type: 'object'
             )
         ),
         tags: ['Authentication'],
@@ -190,6 +192,7 @@ class Authentication
                     properties: [
                         new OA\Property(
                             property: 'user',
+                            type: 'object',
                             properties: [
                                 new OA\Property(property: 'uuid', type: 'string', format: 'uuid', example: '550e8400-e29b-41d4-a716-446655440000'),
                                 new OA\Property(property: 'email', type: 'string', format: 'email', example: 'user@example.com'),
@@ -200,8 +203,7 @@ class Authentication
                                     type: 'array',
                                     items: new OA\Items(type: 'string', example: 'ROLE_USER')
                                 )
-                            ],
-                            type: 'object'
+                            ]
                         )
                     ],
                     type: 'object'
